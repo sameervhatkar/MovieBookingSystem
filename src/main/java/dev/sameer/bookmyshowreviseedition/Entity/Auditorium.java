@@ -15,6 +15,7 @@ import java.util.Map;
 @Setter
 @Entity
 public class Auditorium extends BaseModel {
+    private String theatreName;
     private String audiName;
     private int capacity;
     @OneToMany

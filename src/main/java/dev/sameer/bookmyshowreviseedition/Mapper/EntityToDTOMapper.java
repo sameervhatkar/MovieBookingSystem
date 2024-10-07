@@ -53,9 +53,9 @@ public class EntityToDTOMapper {
         return theatreResponseDTO;
     }
 
-    public static AuditoriumResponseDTO convertAuditoriumEntitytoDTO(Auditorium auditorium, String theatreName) {
+    public static AuditoriumResponseDTO convertAuditoriumEntitytoDTO(Auditorium auditorium) {
         AuditoriumResponseDTO auditoriumResponseDTO = new AuditoriumResponseDTO();
-        auditoriumResponseDTO.setTheatreName(theatreName);
+        auditoriumResponseDTO.setTheatreName(auditorium.getTheatreName());
         auditoriumResponseDTO.setAudiName(auditorium.getAudiName());
         auditoriumResponseDTO.setCapacity(auditorium.getCapacity());
         return auditoriumResponseDTO;

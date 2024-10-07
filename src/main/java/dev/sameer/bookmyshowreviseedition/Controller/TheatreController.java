@@ -2,6 +2,7 @@ package dev.sameer.bookmyshowreviseedition.Controller;
 
 import dev.sameer.bookmyshowreviseedition.DTOs.TheatreRequestDTO;
 import dev.sameer.bookmyshowreviseedition.DTOs.TheatreResponseDTO;
+import dev.sameer.bookmyshowreviseedition.DTOs.TheatreUpdateReqDTO;
 import dev.sameer.bookmyshowreviseedition.Service.TheatreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +31,18 @@ public class TheatreController {
     public ResponseEntity<List<TheatreResponseDTO>> getAllTheatres() {
         return ResponseEntity.ok(theatreService.getAllTheatres());
     }
+
+    @PutMapping("/updateTheatre")
+    public ResponseEntity<TheatreResponseDTO> updateTheatre(@RequestBody TheatreUpdateReqDTO theatreUpdateReqDTO) {
+        return ResponseEntity.ok(theatreService.updateTheatre(theatreUpdateReqDTO));
+    }
+
+    @DeleteMapping("/deleteTheatre/{theatreId}")
+    public ResponseEntity<Boolean> deleteTheatre(@PathVariable UUID theatreId) {
+        return ResponseEntity.ok(theatreService.deleteTheatre(theatreId));
+    }
+
+
 
 
 
