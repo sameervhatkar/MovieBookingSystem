@@ -1,7 +1,5 @@
-package dev.sameer.bookmyshowreviseedition.Entity;
+package dev.sameer.bookmyshowreviseedition.DTOs;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToMany;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,12 +8,10 @@ import java.util.List;
 
 @Getter
 @Setter
-@Entity
-public class Movie extends BaseModel {
+public class MovieUpdateRequestDTO {
     private String movieName;
     private Date releaseDate;
+    private List<String> actorsName;
     private String directorName;
     private int movieDuration;
-    @ManyToMany
-    private List<Actor> actors;
 }

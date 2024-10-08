@@ -127,16 +127,19 @@ public class AuditoriumServiceImpl implements AuditoriumService{
             auditorium.setSeatList(seatList);  // Update the seat list in the auditorium
         }
         else {          //Here we have to delete the seats to this audi
-            List<UUID> seatIds = auditoriumUpdateRequestDTO.getSeatIds();
-            List<Seat> seatList = new ArrayList<>();
-            for(UUID seatId : seatIds) {
-                seatList.add(seatService.getSeat(seatId));
+            List<Seat> seatsToBeRem = new ArrayList<>();
+            for(UUID seatId : auditoriumUpdateRequestDTO.getSeatIds()) {
+                seatsToBeRem.add(seatService.getSeat(seatId));
             }
-            for(Seat seat : seatList) {
-                if(auditorium.getSeatList().contains(seat))
-                    auditorium
+            List<Seat> seatsWeHave = auditorium.getSeatList();
+            for(Seat seat : seatsToBeRem) {
+                if(seatsWeHave.contains(seat)) {
+                    seatsWeHave.remove(seat);
+                }
             }
-            for(UUID seatId : seatIds) {
+            auditorium.setSeatList(seatsWeHave);
+            auditoriumRepo.save(auditorium);
+            for(UUID seatId : auditoriumUpdateRequestDTO.getSeatIds()) {
                 seatService.deleteSeat(seatId);
             }
         }
