@@ -156,5 +156,15 @@ public class AuditoriumServiceImpl implements AuditoriumService{
         return true;
     }
 
+    @Override
+    public Auditorium getAudiById(UUID audiId) {
+        return auditoriumRepo.findById(audiId).orElseThrow(
+                () -> new AuditoriumNotFoundException("Auditorium not found")
+        );
+    }
 
+    @Override
+    public void saveAudi(Auditorium auditorium) {
+        auditoriumRepo.save(auditorium);
+    }
 }

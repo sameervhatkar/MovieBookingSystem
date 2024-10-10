@@ -65,17 +65,20 @@ public class EntityToDTOMapper {
         MovieResponseDTO movieResponseDTO = new MovieResponseDTO();
         movieResponseDTO.setMovieName(movie.getMovieName());
         movieResponseDTO.setReleaseDate(movie.getReleaseDate());
-        movieResponseDTO.setActorsName(movie.getActorsName());
+        List<String> actorsName = new ArrayList<>();
+        for(Actor actor : movie.getActors())
+            actorsName.add(actor.getActorName());
+        movieResponseDTO.setActorsName(actorsName);
         movieResponseDTO.setDirectorName(movie.getDirectorName());
         movieResponseDTO.setMovieDuration(movie.getMovieDuration());
         return movieResponseDTO;
     }
 
-    public static ShowResponseDTO convertShowEntitytoDTO(Show show, String theatreName, String audiName, String movieName) {
+    public static ShowResponseDTO convertShowEntitytoDTO(Show show) {
         ShowResponseDTO showResponseDTO = new ShowResponseDTO();
-        showResponseDTO.setTheatreName(theatreName);
-        showResponseDTO.setAudiName(audiName);
-        showResponseDTO.setMovieName(movieName);
+        showResponseDTO.setTheatreid(show.getTheaterId());
+        showResponseDTO.setAudiId(show.getAudiId());
+        showResponseDTO.setMovieId(show.getMovieId());
         showResponseDTO.setShowTime(show.getShowTimings());
         return showResponseDTO;
     }

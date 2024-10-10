@@ -8,9 +8,9 @@ import java.util.UUID;
 
 @Getter
 @Setter
-public class ShowResponseDTO {
-    private UUID theatreid;
+public class ShowUpdateResquestDTO {
+    private UUID theatreId;
     private UUID audiId;
-    private UUID  movieId;
-    private LocalDateTime showTime;
+    private UUID movieId;
+    private LocalDateTime showTiming;
 }
