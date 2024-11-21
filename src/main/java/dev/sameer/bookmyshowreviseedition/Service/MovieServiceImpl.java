@@ -36,9 +36,7 @@ public class MovieServiceImpl implements MovieService{
         List<String> actorListInMovie = movieRequestDTO.getActorsName();
         List<Actor> actors = new ArrayList<>();
         for(String actorName : actorListInMovie) {
-            Actor actor = actorService.findActor(actorName);
-            if(actor == null)
-                 actor = actorService.createActor(actorName);
+            Actor actor = actorService.findOrCreateActor(actorName);
             actors.add(actor);
         }
         movie.setActors(actors);
@@ -85,9 +83,8 @@ public class MovieServiceImpl implements MovieService{
         List<String> actorListInMovie = movieUpdateRequestDTO.getActorsName();
         List<Actor> actors = new ArrayList<>();
         for(String actorName : actorListInMovie) {
-            Actor actor = actorService.findActor(actorName);
-            if(actor == null)
-                actor = actorService.createActor(actorName);
+            Actor actor = actorService.findOrCreateActor(actorName);
+
             actors.add(actor);
         }
         movie.setActors(actors);

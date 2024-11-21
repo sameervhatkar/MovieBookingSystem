@@ -86,7 +86,10 @@ public class ShowServiceImpl implements ShowService{
         show.setShowTimings(newShowStartTime);
         showRepo.save(show);
 
-        actualAudi.setShows(List.of(show));
+        if (actualAudi.getShows() == null) {
+            actualAudi.setShows(new ArrayList<>());
+        }
+        actualAudi.getShows().add(show);
         auditoriumService.saveAudi(actualAudi);
 
         List<ShowSeat> showSeats = new ArrayList<>();

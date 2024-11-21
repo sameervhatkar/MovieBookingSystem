@@ -13,16 +13,11 @@ public class ActorServiceImpl implements ActorService{
     private ActorRepo actorRepo;
 
     @Override
-    public Actor createActor(String actorName) {
-        Actor actor = new Actor(actorName);
-        actorRepo.save(actor);
-        return actor;
-    }
-
-    @Override
-    public Actor findActor(String actorName) {
-        return actorRepo.findByActorName(actorName).orElseThrow(
-                () -> new ActorNotFoundException("Actor not found")
-        );
+    public Actor findOrCreateActor(String actorName) {
+        return actorRepo.findByActorName(actorName).orElseGet(() -> {
+            Actor newActor = new Actor(actorName);
+            actorRepo.save(newActor);
+            return newActor;
+        });
     }
 }
