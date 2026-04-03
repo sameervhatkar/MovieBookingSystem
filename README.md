@@ -163,6 +163,105 @@ Ensures entities are not exposed directly to clients.
 
 ---
 
+# 🔐 Security Implementation
+
+Spring Security has been integrated to protect application endpoints using **HTTP Basic Authentication**.
+
+Currently implemented authentication flow:
+
+```
+Client sends username + password
+↓
+Spring Security intercepts request
+↓
+Custom UserDetailsService loads user from database
+↓
+Password verified using BCryptPasswordEncoder
+↓
+Access granted if credentials are valid
+```
+
+---
+
+## Public Endpoints
+
+The following endpoints are accessible without authentication:
+
+```
+POST /signup
+POST /login
+```
+
+All other endpoints require authentication.
+
+---
+
+## Password Encryption
+
+User passwords are securely stored using:
+
+```
+BCryptPasswordEncoder
+```
+
+This ensures passwords are never stored in plain text inside the database.
+
+---
+
+## Custom Authentication Components
+
+Security configuration uses:
+
+```
+SecurityFilterChain
+DaoAuthenticationProvider
+Custom UserDetailsService
+Custom UserDetails implementation
+BCryptPasswordEncoder
+```
+
+Authentication logic is implemented inside:
+
+```
+SecurityConfiguration.java
+MyUserDetailsService.java
+MyUserDetails.java
+```
+
+---
+
+## Protected Endpoints Example
+
+Examples of secured endpoints:
+
+```
+POST /admin/movies
+POST /admin/shows
+POST /bookings
+POST /payments
+```
+
+These endpoints require valid authentication credentials.
+
+Example request header:
+
+```
+Authorization: Basic base64(username:password)
+```
+
+---
+
+## Future Security Enhancements (Planned)
+
+Planned upgrades:
+
+```
+JWT Authentication
+Role-Based Authorization (Admin / User separation)
+Refresh token support
+Stateless session architecture
+```
+
 # ⚙️ How To Run The Project
 
 ### Step 1
